@@ -42,6 +42,19 @@ public:
         qDebug() << Q_FUNC_INFO << "All ducks float, even decoys!";
     }
 
+    /*
+     * Динамическое изменение поведения
+     */
+    void setFlyBehavior(FlyBehavior *fb)
+    {
+        flyBehavior = fb;
+    }
+
+    void setQuackBehavior(QuackBehavior *qb)
+    {
+        quackBehavior = qb;
+    }
+
 protected:
     /*
      * Интерфейсы в C++ - это абстрактные классы.
@@ -75,5 +88,30 @@ public:
         qDebug() << Q_FUNC_INFO << "I'm a real Mallard Duck";
     }
 };
+
+/*
+ * Утка-примнка
+ */
+class ModelDuck : public Duck
+{
+public:
+    ModelDuck() : Duck()
+    {
+        flyBehavior = new FlyNoWay;
+        quackBehavior = new Quack;
+    }
+
+    ~ModelDuck()
+    {
+        delete flyBehavior;
+        delete quackBehavior;
+    }
+
+    void display() override
+    {
+        qDebug() << Q_FUNC_INFO << "I'm a model Duck";
+    }
+};
+
 
 #endif // DUCK_H

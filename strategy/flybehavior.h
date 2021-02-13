@@ -12,6 +12,9 @@ public:
     virtual void fly() const = 0;
 };
 
+/*
+ * Умеет летать
+ */
 class FlyWithWings : public FlyBehavior
 {
 public:
@@ -21,12 +24,27 @@ public:
     }
 };
 
+/*
+ * Не умеет летать
+ */
 class FlyNoWay : public FlyBehavior
 {
 public:
     void fly() const override
     {
         qDebug() << Q_FUNC_INFO << "I can't fly =(";
+    }
+};
+
+/*
+ * Реактивный полет
+ */
+class FlyRockedPowered : public FlyBehavior
+{
+public:
+    void fly() const override
+    {
+        qDebug() << Q_FUNC_INFO << "I'm flying with a rocket";
     }
 };
 
