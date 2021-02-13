@@ -3,17 +3,20 @@
 
 #include <QDebug>
 
+/*
+ * Абстрактный класс интерфейса "квакающие"
+ */
 class QuackBehavior
 {
 public:
-    QuackBehavior() {}
-    virtual void quack() = 0;
+    virtual ~QuackBehavior() {}
+    virtual void quack() const = 0;
 };
 
 class Quack : public QuackBehavior
 {
 public:
-    void quack() override
+    void quack() const override
     {
         qDebug() << Q_FUNC_INFO << "Quack!";
     }
@@ -22,7 +25,7 @@ public:
 class MuteQuack : public QuackBehavior
 {
 public:
-    void quack() override
+    void quack() const override
     {
         qDebug() << Q_FUNC_INFO << "<< Silence >>";
     }
@@ -31,7 +34,7 @@ public:
 class Squeak : public QuackBehavior
 {
 public:
-    void quack() override
+    void quack() const override
     {
         qDebug() << Q_FUNC_INFO << "Squeak!";
     }

@@ -2,17 +2,20 @@
 #define FLYBEHAVIOR_H
 #include <QDebug>
 
+/*
+ * Абстрактный класс интерфейса "летающие"
+ */
 class FlyBehavior
 {
 public:
-    FlyBehavior() {}
-    virtual void fly() = 0;
+    virtual ~FlyBehavior() {}  // В классах интерфейса (абстрактных) необходимо объявить виртуальный деструктор
+    virtual void fly() const = 0;
 };
 
 class FlyWithWings : public FlyBehavior
 {
 public:
-    void fly() override
+    void fly() const override
     {
         qDebug() << Q_FUNC_INFO << "I'm flying!";
     }
@@ -21,7 +24,7 @@ public:
 class FlyNoWay : public FlyBehavior
 {
 public:
-    void fly() override
+    void fly() const override
     {
         qDebug() << Q_FUNC_INFO << "I can't fly =(";
     }

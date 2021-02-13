@@ -5,18 +5,15 @@
 #include "quackbehavior.h"
 #include <QDebug>
 
+/*
+ * Базовый класс Утки
+ */
 class Duck
 {
 public:
 
-    /*
-     * Интерфейсы в C++ - это абстрактные классы.
-     * они объявляются указателями
-     */
-    FlyBehavior *flyBehavior;       // Интерфейс "летающие"
-    QuackBehavior *quackBehavior;   // Интерфейс "квакающие"
-
     Duck() {}
+    virtual ~Duck() {}
 
     /*
      * Метод, который будет иметь разную реализацию, но будет точно у всех
@@ -45,8 +42,19 @@ public:
         qDebug() << Q_FUNC_INFO << "All ducks float, even decoys!";
     }
 
+protected:
+    /*
+     * Интерфейсы в C++ - это абстрактные классы.
+     * они объявляются указателями
+     */
+    FlyBehavior *flyBehavior = nullptr;       // Интерфейс "летающие"
+    QuackBehavior *quackBehavior = nullptr;   // Интерфейс "квакающие"
+
 };
 
+/*
+ * Класс крякающей утки
+ */
 class MallardDuck : public Duck
 {
 public:
@@ -54,6 +62,12 @@ public:
     {
         flyBehavior = new FlyWithWings;
         quackBehavior = new Quack;
+    }
+
+    ~MallardDuck()
+    {
+        delete flyBehavior;
+        delete quackBehavior;
     }
 
     void display() override
