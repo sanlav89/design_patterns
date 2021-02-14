@@ -28,6 +28,17 @@ public:
     virtual void removeObserver(Observer *o) = 0;
     virtual void notifyObservers() = 0;
 
+    /*
+     * Данный метод нужно вызывать для того, чтобы сделать оповещения более редкими
+     */
+    void setChanged()
+    {
+        changed = true;
+    }
+
+protected:
+    bool changed = false;
+
 signals:
     void valuesChanged(float, float, float);
 };

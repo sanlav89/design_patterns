@@ -34,7 +34,10 @@ public:
 
     void notifyObservers() override
     {
-        emit valuesChanged(temperature, humidity, pressure);
+        if (changed) {
+            emit valuesChanged(temperature, humidity, pressure);
+            changed = false;
+        }
     }
 
     void measurementsChanged()
@@ -44,10 +47,15 @@ public:
 
     void setMeasurements(float temperature, float humidity, float pressure)
     {
+        static bool first = false; // Пропуск оповещения при появлении первого показания
         this->temperature = temperature;
         this->humidity = humidity;
         this->pressure = pressure;
+        if (first) {
+            setChanged();
+        }
         measurementsChanged();
+        first = true;
     }
 
     // Другие методы WeatherData
