@@ -58,7 +58,13 @@ public:
         first = true;
     }
 
-    // Другие методы WeatherData
+    /*
+     * Эти методы могут быть реализованы, если наблюдателям нужно получать данные
+     * об объекте в любой момент
+     */
+    // float getTemperature() const;
+    // float getHumidity() const;
+    // float getPressure() const;
 
 private:
     QList<Observer *> observers;
