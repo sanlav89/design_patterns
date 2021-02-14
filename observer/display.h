@@ -7,6 +7,7 @@
 
 class CurrentConditionsDisplay : public Observer, public DisplayElement
 {
+    Q_OBJECT
 public:
     CurrentConditionsDisplay(Subject *weatherData)
     {
@@ -38,6 +39,7 @@ private:
 
 class StatisticsDisplay : public Observer, public DisplayElement
 {
+    Q_OBJECT
 public:
     StatisticsDisplay(Subject *weatherData) :
         minTemperature(0),

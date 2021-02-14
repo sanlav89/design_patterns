@@ -6,6 +6,7 @@
 
 class WeatherData : public Subject
 {
+    Q_OBJECT
 public:
     WeatherData() :
         Subject(),
@@ -18,6 +19,7 @@ public:
 
     void registerObserver(Observer *o) override
     {
+        connect(this, &Subject::valuesChanged, o, &Observer::update);
         observers.append(o);
     }
 
@@ -25,15 +27,14 @@ public:
     {
         int i = observers.indexOf(o);
         if (i >= 0) {
+            disconnect(this, &Subject::valuesChanged, o, &Observer::update);
             observers.removeAt(i);
         }
     }
 
     void notifyObservers() override
     {
-        for (int i = 0; i < observers.size(); i++) {
-            observers[i]->update(temperature, humidity, pressure);
-        }
+        emit valuesChanged(temperature, humidity, pressure);
     }
 
     void measurementsChanged()
