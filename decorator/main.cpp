@@ -3,6 +3,8 @@
 #include "decorated.h"
 #include <QDebug>
 
+#include <QDataStream>
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
