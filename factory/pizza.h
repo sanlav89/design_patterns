@@ -13,7 +13,7 @@ public:
         qDebug() << "Preparing" << m_name;
         qDebug() << "Tossing dough...";
         qDebug() << "Adding sause...";
-        qDebug() << "Add toppings: ";
+        qDebug() << "Adding toppings: ";
         for (QString topping : m_toppings) {
             qDebug() << "    " << topping;
         }
